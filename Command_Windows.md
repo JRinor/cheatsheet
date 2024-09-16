@@ -10,6 +10,7 @@
 - **move** : Déplace des fichiers
 - **del** : Supprime des fichiers
 - **rename** ou **ren** : Renomme un fichier ou dossier
+- **tree** </A> </F> : Affiche l'arboressance
 
 ### Système
 
