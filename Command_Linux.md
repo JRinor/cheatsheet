@@ -3,55 +3,101 @@
 ### Navigation dans le système de fichiers
 
 - **`pwd`** : Affiche le chemin du répertoire courant.
-  
-- **`ls`** : Liste le contenu du répertoire courant.
+
+- **`ls [options] [chemin]`** : Liste le contenu d'un répertoire.
   - **Options** :
-    - `ls -l` : Affiche les détails des fichiers (permissions, taille, date).
-    - `ls -a` : Affiche tous les fichiers, y compris ceux cachés.
-    - `ls -la` : Combine les deux options ci-dessus.
+    - `-l` : Format long.
+    - `-a` : Affiche les fichiers cachés.
+    - `-h` : Tailles lisibles par l'homme.
+    - `-R` : Récursif.
 
-- **`cd <répertoire>`** : Change le répertoire courant vers `<répertoire>`.
-  - **Exemples** :
-    - `cd ..` : Remonte d'un niveau dans l'arborescence.
-    - `cd ~` : Accède au répertoire personnel de l'utilisateur.
+- **`cd [chemin]`** : Change le répertoire courant.
+  - **Raccourcis** :
+    - `cd -` : Retourne au répertoire précédent.
+    - `cd ~` ou `cd` : Accède au répertoire personnel.
+    - `cd /` : Accède à la racine.
 
-### Gestion des fichiers
+### Gestion des fichiers et répertoires
 
-- **`touch <nom_fichier>`** : Crée un fichier vide nommé `<nom_fichier>`.
+- **`touch [options] <fichier>`** : Crée un fichier vide ou met à jour l'horodatage.
 
-- **`cat <nom_fichier>`** : Affiche le contenu du fichier `<nom_fichier>`.
-
-- **`cp <source> <destination>`** : Copie un fichier ou un répertoire.
+- **`cat [options] <fichier>`** : Affiche le contenu d'un fichier.
   - **Options** :
-    - `cp -r <source> <destination>` : Copie un répertoire et son contenu.
+    - `-n` : Numérote les lignes.
+    - `-A` : Affiche les caractères non imprimables.
 
-- **`mv <source> <destination>`** : Déplace ou renomme un fichier ou un répertoire.
-
-- **`rm <nom_fichier>`** : Supprime le fichier `<nom_fichier>`.
+- **`cp [options] <source> <destination>`** : Copie fichiers et répertoires.
   - **Options** :
-    - `rm -r <nom_répertoire>` : Supprime un répertoire et son contenu.
-    - `rm -f <nom_fichier>` : Force la suppression sans demander confirmation.
+    - `-r` ou `-R` : Récursif.
+    - `-i` : Interactif.
+    - `-p` : Préserve les attributs.
 
-### Gestion des répertoires
+- **`mv [options] <source> <destination>`** : Déplace ou renomme.
+  - **Options** :
+    - `-i` : Interactif.
+    - `-u` : Met à jour.
 
-- **`mkdir <nom_répertoire>`** : Crée un nouveau répertoire nommé `<nom_répertoire>`.
+- **`rm [options] <fichier/répertoire>`** : Supprime fichiers ou répertoires.
+  - **Options** :
+    - `-r` : Récursif.
+    - `-f` : Force la suppression sans confirmation.
+    - `-i` : Interactif.
 
-- **`rmdir <nom_répertoire>`** : Supprime un répertoire vide nommé `<nom_répertoire>`.
+- **`mkdir [options] <nom_répertoire>`** : Crée un nouveau répertoire.
+  - **Option** : `-p`.
 
-### Informations système
+- **`rmdir <nom_répertoire>`** : Supprime un répertoire vide.
 
-- **`free -h`** : Affiche la mémoire utilisée et disponible (en format lisible).
+### Manipulation de texte et recherche
 
-- **`df -h`** : Affiche l'espace disque utilisé et disponible sur les systèmes de fichiers montés.
+- **`grep [options] <motif> <fichier>`** : Recherche un motif dans un fichier.
+  - **Options** :
+    - `-i` : Insensible à la casse.
+    - `-r` : Récursif.
+    - `-n` : Affiche les numéros de ligne.
 
-- **`top`** : Affiche les processus en cours et leur utilisation des ressources en temps réel.
+- **`sed 's/ancien/nouveau/g' <fichier>`** : Remplace du texte dans un fichier.
+
+- **`awk '{print $1}' <fichier>`** : Traitement de texte avancé.
+
+### Gestion des processus et ressources
+
+- **`ps [options]`** : Affiche les processus en cours.
+  - **Exemple** : `ps aux`.
+
+- **`top`** ou **`htop`** : Affiche les processus en temps réel.
+
+- **`kill [signal] <PID>`** : Envoie un signal à un processus.
+
+- **`free -h`** : Affiche l'utilisation de la mémoire.
+
+- **`df -h`** : Affiche l'utilisation de l'espace disque.
+
+### Réseau
+
+- **`ifconfig`** ou **`ip addr`** : Affiche la configuration réseau.
+
+- **`ping <hôte>`** : Teste la connectivité avec un hôte.
+
+- **`netstat -tuln`** : Affiche les connexions réseau actives.
+
+### Gestion des utilisateurs et permissions
+
+- **`sudo <commande>`** : Exécute une commande avec des privilèges root.
+
+- **`chmod [options] <permissions> <fichier>`** : Modifie les permissions d'un fichier.
+
+- **`chown [options] <utilisateur>:<groupe> <fichier>`** : Change le propriétaire d'un fichier.
 
 ### Autres commandes utiles
 
-- **`man <commande>`** : Ouvre le manuel de la commande spécifiée pour plus d'informations.
+- **`man <commande>`** : Affiche le manuel d'une commande.
 
-- **`sudo <commande>`** : Exécute une commande avec des privilèges administratifs.
+- **`history`** : Affiche l'historique des commandes.
 
-- **`history`** : Affiche l'historique des commandes précédemment exécutées.
+- **`tar [options] <archive> <fichiers>`** : Crée ou extrait des archives.
 
-- **`grep <motif> <fichier>`** : Recherche le motif spécifié dans le fichier donné.
+- **Exemple pour tar**: `tar -czvf archive.tar.gz dossier/`.
+
+- **`find <chemin> -name "<motif>"`** : Recherche des fichiers.
+  - Exemple: `find /home -name "*.txt"`.

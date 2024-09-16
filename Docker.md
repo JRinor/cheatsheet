@@ -1,45 +1,73 @@
 ## Cheatsheet Docker
 
 ### Concepts de base
-- **"image" Docker** = Modèle permettant de créer un conteneur.
-- **"conteneur" Docker** = Une version exécutée de l'image.
+- **Image Docker** : Modèle en lecture seule pour créer des conteneurs.
+- **Conteneur Docker** : Instance exécutable d'une image.
+- **Dockerfile** : Script de configuration pour construire une image.
+- **Docker Hub** : Registre public d'images Docker.
 
-### Commandes Docker
-- **`docker pull ubuntu`** = Télécharge l'image Ubuntu depuis le Docker Hub.
+### Gestion des images
+- **`docker pull <image>:<tag>`** : Télécharge une image depuis un registre.
+  - Exemple : `docker pull ubuntu:22.04`
 
-- **`docker run`** = Combine `docker pull` et `docker start`.  
-  - **Exemples :**
-    - `docker run -it --name ubuntu1 ubuntu` = Crée et démarre un conteneur nommé "ubuntu1" en mode interactif.
-    - `docker run -it --name apache1 -p 5000:80` = Crée et démarre un conteneur nommé "apache1" en mode interactif, redirigeant le port 5000 de l'hôte vers le port 80 du conteneur.
+- **`docker images`** : Liste les images locales.
 
-- **`docker ps -a`** = Affiche tous les conteneurs, qu'ils soient en cours d'exécution ou arrêtés.
+- **`docker image rm <image>`** ou **`docker rmi <image>`** : Supprime une image.
 
-- **`docker ps`** = Affiche uniquement les conteneurs en cours d'exécution.
+- **`docker build -t <nom>:<tag> .`** : Construit une image à partir d'un Dockerfile.
+  - Option `-f <fichier>` : Spécifie un Dockerfile alternatif.
 
-- **`docker start ubuntu1`** = Démarre le conteneur nommé "ubuntu1".
+- **`docker commit <conteneur> <nouvelle_image>`** : Crée une image à partir d'un conteneur modifié.
 
-- **`docker stop <nom ou id>`** = Stoppe le conteneur spécifié.
+### Gestion des conteneurs
+- **`docker run [options] <image> [commande]`** : Crée et démarre un nouveau conteneur.
+  - Options courantes :
+    - `-d` : Mode détaché (background).
+    - `-it` : Mode interactif avec un terminal.
+    - `--name <nom>` : Attribue un nom au conteneur.
+    - `-p <hôte>:<conteneur>` : Mappe les ports.
+    - `-v <hôte>:<conteneur>` : Monte un volume.
 
-- **`docker attach ubuntu1`** = Se connecte au terminal du conteneur "ubuntu1".
+- **`docker ps`** : Liste les conteneurs en cours d'exécution.
+  - Option `-a` : Inclut les conteneurs arrêtés.
 
-- **`docker exec <nom ou id> <commande>`** = Lance une commande dans le conteneur spécifié.
+- **`docker start <conteneur>`** : Démarre un conteneur arrêté.
 
-- **`docker rm <nom ou id>`** = Supprime un conteneur spécifié.
+- **`docker stop <conteneur>`** : Arrête un conteneur en cours d'exécution.
 
-- **`docker image rm <nom ou id>`** = Supprime une image spécifiée.
+- **`docker restart <conteneur>`** : Redémarre un conteneur.
 
-- **`docker images`** = Liste toutes les images Docker disponibles localement.
+- **`docker rm <conteneur>`** : Supprime un conteneur arrêté.
+  - Option `-f` : Force la suppression d'un conteneur en cours d'exécution.
 
-- **`docker build -t <nom_image>:<tag> .`** = Crée une image à partir d'un Dockerfile dans le répertoire courant.
+- **`docker exec -it <conteneur> <commande>`** : Exécute une commande dans un conteneur en cours d'exécution.
 
-- **`docker logs <nom ou id>`** = Affiche les logs du conteneur spécifié.
+### Logs et debugging
+- **`docker logs <conteneur>`** : Affiche les logs d'un conteneur.
+  - Option `-f` : Suit les logs en temps réel.
 
-- **`docker volume ls`** = Liste tous les volumes Docker disponibles.
+- **`docker inspect <conteneur/image>`** : Affiche des informations détaillées.
 
-- **`docker network ls`** = Liste tous les réseaux Docker disponibles.
+### Réseau
+- **`docker network ls`** : Liste les réseaux Docker.
 
-- **`docker inspect <nom ou id>`** = Obtient des informations détaillées sur un conteneur ou une image.
+- **`docker network create <nom>`** : Crée un nouveau réseau.
 
-- **`docker commit <conteneur> <nouvelle_image>`** = Crée une nouvelle image à partir d'un conteneur modifié.
+- **`docker network connect <réseau> <conteneur>`** : Connecte un conteneur à un réseau.
 
-- **`docker push <nom_image>`** = Envoie une image vers un registre Docker distant (comme Docker Hub).
+### Volumes
+- **`docker volume ls`** : Liste les volumes.
+
+- **`docker volume create <nom>`** : Crée un nouveau volume.
+
+- **`docker volume rm <nom>`** : Supprime un volume.
+
+### Docker Compose
+- **`docker-compose up`** : Démarre les services définis dans docker-compose.yml.
+  - Option `-d` : Mode détaché.
+
+- **`docker-compose down`** : Arrête et supprime les conteneurs, réseaux, et volumes définis.
+
+### Nettoyage
+- **`docker system prune`** : Supprime tous les conteneurs, réseaux, et images inutilisés.
+  - Option `-a` : Inclut les images non taguées.
