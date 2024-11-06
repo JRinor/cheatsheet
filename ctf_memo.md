@@ -62,7 +62,5 @@ ftp 1.1.1.1
 ```bash
 feroxbuster -u http://1.1.1.1:port/
 ```
-
 - Cherche s'il y a d'autres pages
-```
 
