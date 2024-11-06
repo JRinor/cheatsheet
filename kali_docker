@@ -1,0 +1,2 @@
+sudo docker start kali-container
+sudo docker exec -it kali-container bash

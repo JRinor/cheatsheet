@@ -1,0 +1,53 @@
+1) nmap -A ip -p-
+(-A 	: essaye de découvrir le système hôte)
+(-p- 	: test tout les ports de 1-65535)
+
+port:
+	135-139 = windows car remote desktop
+	3389 	= rdp
+	3306 	= mysql
+	80 	= web
+
+
+2) searchsploit apache 2.4.57
+
+
+
+metasploit:
+msfconsole --> pour run 
+setg 			--> mettre des variables global
+ex: setg RHOSTS (ip de cible) 
+ex : setG RHOSTS 1.1.1.1
+setg LHOSTS (mon ip) 	--> pour reverse shell
+setg LPORT 1234 	--> mon port pour le reverse shell
+
+search (module)
+ex: search tika
+
+
+use (numéro a utiliser)
+ex: use 3
+
+info --> ca explique la faille et comment ca se configure
+
+sessions --> sessions que j'ai ouvert
+
+jobs --> jobs que j'ai lancer
+
+run --> lance un job
+ou
+run -j --> lance un job en background
+
+
+sessions 1 --> rejoindre la sessions 1 si job a réussi
+
+  
+si ftp:
+ftp 1.1.1.1
+anonymous
+password vide
+
+feroxbuster -u http://1.1.1.1:port/ --> cherche si il y a d'autres pages
+
+
+
