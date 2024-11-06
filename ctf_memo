@@ -1,53 +1,68 @@
-1) nmap -A ip -p-
-(-A 	: essaye de découvrir le système hôte)
-(-p- 	: test tout les ports de 1-65535)
+# CTF Memo
 
-port:
-	135-139 = windows car remote desktop
-	3389 	= rdp
-	3306 	= mysql
-	80 	= web
+## Nmap
 
+```bash
+nmap -A ip -p-
+```
 
-2) searchsploit apache 2.4.57
+- `-A`: Essaye de découvrir le système hôte
+- `-p-`: Test tous les ports de 1 à 65535
 
+### Ports
 
+- 135-139 : Windows car Remote Desktop
+- 3389    : RDP
+- 3306    : MySQL
+- 80      : Web
 
-metasploit:
-msfconsole --> pour run 
-setg 			--> mettre des variables global
-ex: setg RHOSTS (ip de cible) 
-ex : setG RHOSTS 1.1.1.1
-setg LHOSTS (mon ip) 	--> pour reverse shell
-setg LPORT 1234 	--> mon port pour le reverse shell
+## Searchsploit
 
-search (module)
-ex: search tika
+```bash
+searchsploit apache 2.4.57
+```
 
+## Metasploit
 
-use (numéro a utiliser)
-ex: use 3
+- `msfconsole` : Pour lancer Metasploit
+- `setg` : Mettre des variables globales
+  - Exemple : `setg RHOSTS (ip de cible)`
+  - Exemple : `setg RHOSTS 1.1.1.1`
+  - Exemple : `setg LHOSTS (mon ip)` pour reverse shell
+  - Exemple : `setg LPORT 1234` pour le port du reverse shell
 
-info --> ca explique la faille et comment ca se configure
+- `search (module)` : Rechercher un module
+  - Exemple : `search tika`
 
-sessions --> sessions que j'ai ouvert
+- `use (numéro à utiliser)` : Utiliser un module
+  - Exemple : `use 3`
 
-jobs --> jobs que j'ai lancer
+- `info` : Explique la faille et comment la configurer
 
-run --> lance un job
-ou
-run -j --> lance un job en background
+- `sessions` : Affiche les sessions ouvertes
 
+- `jobs` : Affiche les jobs lancés
 
-sessions 1 --> rejoindre la sessions 1 si job a réussi
+- `run` : Lancer un job
+  - `run -j` : Lancer un job en arrière-plan
 
-  
-si ftp:
+- `sessions 1` : Rejoindre la session 1 si le job a réussi
+
+## FTP
+
+```bash
 ftp 1.1.1.1
-anonymous
-password vide
+```
 
-feroxbuster -u http://1.1.1.1:port/ --> cherche si il y a d'autres pages
+- Utilisateur : `anonymous`
+- Mot de passe : vide
 
+## Feroxbuster
 
+```bash
+feroxbuster -u http://1.1.1.1:port/
+```
+
+- Cherche s'il y a d'autres pages
+```
 
