@@ -59,6 +59,8 @@ ftp 1.1.1.1
 
 ## Feroxbuster
 
+feroxbuster -u url
+
 ```bash
 feroxbuster -u http://1.1.1.1:port/
 ```
